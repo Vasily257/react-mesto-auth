@@ -11,6 +11,8 @@ import AddPlacePopup from '../AddPlacePopup/AddPlacePopup';
 import ConfirmActionPopup from '../СonfirmActionPopup/ConfirmActionPopup';
 import Spinner from '../Spinner/Spinner';
 
+import { Route, Routes } from 'react-router-dom';
+
 import { api } from '../../utils/api';
 
 function App() {
@@ -169,54 +171,63 @@ function App() {
   }, []);
 
   return (
-    <div className="page index-page">
-      <Header />
+    <Routes>
+      <Route
+        exact
+        path="/"
+        element={
+          <div className="page index-page">
+            <Header />
 
-      <CurrentUserContext.Provider value={currentUser}>
-        <Main
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          cards={cards}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
-      </CurrentUserContext.Provider>
+            <CurrentUserContext.Provider value={currentUser}>
+              <Main
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                cards={cards}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+              />
+            </CurrentUserContext.Provider>
 
-      <Footer />
+            <Footer />
 
-      <CurrentUserContext.Provider value={currentUser}>
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
-      </CurrentUserContext.Provider>
+            <CurrentUserContext.Provider value={currentUser}>
+              <EditProfilePopup
+                isOpen={isEditProfilePopupOpen}
+                onClose={closeAllPopups}
+                onUpdateUser={handleUpdateUser}
+              />
+            </CurrentUserContext.Provider>
 
-      <AddPlacePopup
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-        onAddPlace={handleAddPlaceSubmit}
+            <AddPlacePopup
+              isOpen={isAddPlacePopupOpen}
+              onClose={closeAllPopups}
+              onAddPlace={handleAddPlaceSubmit}
+            />
+
+            <EditAvatarPopup
+              isOpen={isEditAvatarPopupOpen}
+              onClose={closeAllPopups}
+              onUpdateAvatar={handleUpdateAvatar}
+            />
+
+            <ConfirmActionPopup
+              isOpen={isConfirmActionPopupOpen}
+              onClose={closeAllPopups}
+              card={deletedCard}
+              onConfirmAction={deleteCard}
+            />
+
+            <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+            <Spinner isOpen={isSpinnerShown} />
+          </div>
+        }
       />
-
-      <EditAvatarPopup
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-        onUpdateAvatar={handleUpdateAvatar}
-      />
-
-      <ConfirmActionPopup
-        isOpen={isConfirmActionPopupOpen}
-        onClose={closeAllPopups}
-        card={deletedCard}
-        onConfirmAction={deleteCard}
-      />
-
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
-      <Spinner isOpen={isSpinnerShown} />
-    </div>
+      <Route path="*" element={<div>Страница не найдена. Код 404</div>} />
+    </Routes>
   );
 }
 
