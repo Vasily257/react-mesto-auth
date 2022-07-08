@@ -183,7 +183,7 @@ function App() {
         <Route
           path="/"
           element={
-            <div className="page index-page">
+            <>
               <CurrentUserContext.Provider value={currentUser}>
                 <Main
                   onEditProfile={handleEditProfileClick}
@@ -230,26 +230,12 @@ function App() {
               />
 
               <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-            </div>
+            </>
           }
         />
 
-        <Route
-          path="/sign-up"
-          element={
-            <div className="page index-page">
-              <Login isOpen={true} />
-            </div>
-          }
-        />
-        <Route
-          path="/sign-in"
-          element={
-            <div className="page index-page">
-              <Login isOpen={true} />
-            </div>
-          }
-        />
+        <Route path="/sign-up" element={<Login isOpen={true} />} />
+        <Route path="/sign-in" element={<Login isOpen={true} />} />
         <Route path="*" element={<div>Страница не найдена. Код 404</div>} />
       </Routes>
       <Spinner isOpen={isSpinnerShown} />
