@@ -1,19 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import Header from '../Header/Header';
-import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
-
-import ImagePopup from '../ImagePopup/ImagePopup';
-
-import EditProfilePopup from '../EditProfilePopup/EditProfilePopup';
-import EditAvatarPopup from '../EditAvatarPopup/EditAvatarPopup';
-import AddPlacePopup from '../AddPlacePopup/AddPlacePopup';
-
-import ConfirmActionPopup from '../СonfirmActionPopup/ConfirmActionPopup';
-
+import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 
@@ -220,54 +209,27 @@ function App() {
         <Route
           path="/"
           element={
-            <>
-              <CurrentUserContext.Provider value={currentUser}>
-                <Main
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onEditAvatar={handleEditAvatarClick}
-                  cards={cards}
-                  onCardClick={handleCardClick}
-                  onCardLike={handleCardLike}
-                  onCardDelete={handleCardDelete}
-                />
-              </CurrentUserContext.Provider>
-
-              <Footer />
-
-              <CurrentUserContext.Provider value={currentUser}>
-                <EditProfilePopup
-                  isOpen={isEditProfilePopupOpen}
-                  onClose={closeAllPopups}
-                  isPopup={true}
-                  onUpdateUser={handleUpdateUser}
-                />
-              </CurrentUserContext.Provider>
-
-              <AddPlacePopup
-                isOpen={isAddPlacePopupOpen}
-                onClose={closeAllPopups}
-                isPopup={true}
-                onAddPlace={handleAddPlaceSubmit}
-              />
-
-              <EditAvatarPopup
-                isOpen={isEditAvatarPopupOpen}
-                onClose={closeAllPopups}
-                isPopup={true}
-                onUpdateAvatar={handleUpdateAvatar}
-              />
-
-              <ConfirmActionPopup
-                isOpen={isConfirmActionPopupOpen}
-                onClose={closeAllPopups}
-                isPopup={true}
-                card={deletedCard}
-                onConfirmAction={deleteCard}
-              />
-
-              <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-            </>
+            <Home
+              currentUser={currentUser}
+              isEditProfilePopupOpen={isEditProfilePopupOpen}
+              isAddPlacePopupOpen={isAddPlacePopupOpen}
+              isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+              isConfirmActionPopupOpen={isConfirmActionPopupOpen}
+              cards={cards}
+              selectedCard={selectedCard}
+              deletedCard={deletedCard}
+              handleEditProfileClick={handleEditProfileClick}
+              handleAddPlaceClick={handleAddPlaceClick}
+              handleEditAvatarClick={handleEditAvatarClick}
+              handleCardClick={handleCardClick}
+              handleCardLike={handleCardLike}
+              handleCardDelete={handleCardDelete}
+              deleteCard={deleteCard}
+              closeAllPopups={closeAllPopups}
+              handleUpdateUser={handleUpdateUser}
+              handleUpdateAvatar={handleUpdateAvatar}
+              handleAddPlaceSubmit={handleAddPlaceSubmit}
+            />
           }
         />
 
