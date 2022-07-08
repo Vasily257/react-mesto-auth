@@ -3,7 +3,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 import useForm from '../../hooks/useForm';
 
-export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
+export default function EditAvatarPopup({ isOpen, onClose, isPopup, onUpdateAvatar }) {
   const avatarRef = useRef();
 
   const { errors, isValid, handleChange, resetForm, setValues, setIsValid } =
@@ -30,6 +30,7 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       title="Обновить аватар"
       submitButtonText="Сохранить"
       isOpen={isOpen}
+      isPopup={isPopup}
       onClose={onClose}
       onSubmit={handleSubmit}
       onReset={() => {

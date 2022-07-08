@@ -4,7 +4,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 import useForm from '../../hooks/useForm';
 
-export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+export default function EditProfilePopup({ isOpen, onClose, isPopup, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
 
   const {
@@ -34,6 +34,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       title="Редактировать профиль"
       submitButtonText="Сохранить"
       isOpen={isOpen}
+      isPopup={isPopup}
       onClose={onClose}
       onSubmit={handleSubmit}
       onReset={resetForm}

@@ -3,6 +3,7 @@ export default function PopupWithForm({
   title,
   submitButtonText,
   isOpen,
+  isPopup,
   onClose,
   onSubmit,
   onReset,
@@ -16,13 +17,22 @@ export default function PopupWithForm({
 
   return (
     <div
-      className={`popup popup_type_${name} ${isOpen && 'popup_opened'}`}
+      className={`popup popup_type_${name} ${isOpen && 'popup_opened'} ${
+        !isPopup && 'popup_not-popup'
+      }`}
       onClick={(event) => {
-        event.target === event.currentTarget && closeAndResetPopup();
+        if (isPopup)
+          event.target === event.currentTarget && closeAndResetPopup();
       }}
     >
-      <div className="popup__container">
-        <h2 className="popup__title">{title}</h2>
+      <div
+        className={`popup__container ${
+          !isPopup && 'popup__container_not-popup'
+        }`}
+      >
+        <h2 className={`popup__title ${!isPopup && 'popup__title_not-popup'}`}>
+          {title}
+        </h2>
         <form
           className={`popup__form popup__form_type_${name}`}
           name={name}
@@ -33,7 +43,7 @@ export default function PopupWithForm({
           <button
             className={`button popup__submit-button ${
               !isValid && 'popup__submit-button_disabled'
-            }`}
+            } ${!isPopup && 'popup_submit-button_not-popup'} `}
             type="submit"
             disabled={!isValid}
           >
@@ -41,11 +51,17 @@ export default function PopupWithForm({
           </button>
         </form>
         <button
-          className="button popup__close-button"
+          className={`${isPopup ? 'button popup__close-button' : 'hidden'}`}
           type="button"
           aria-label="Закрыть форму"
           onClick={closeAndResetPopup}
         ></button>
+        {!isPopup && (
+          <div className="popup__footer">
+            <span className="popup__footer-text">Уже зарегистрированы?</span>
+            <button className="button popup__footer-button">Войти</button>
+          </div>
+        )}
       </div>
     </div>
   );

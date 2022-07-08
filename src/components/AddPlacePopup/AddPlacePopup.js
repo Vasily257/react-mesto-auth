@@ -3,7 +3,12 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 import useForm from '../../hooks/useForm';
 
-export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+export default function AddPlacePopup({
+  isOpen,
+  onClose,
+  isPopup,
+  onAddPlace,
+}) {
   const {
     values,
     errors,
@@ -30,6 +35,7 @@ export default function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       title="Новое место"
       submitButtonText="Создать"
       isOpen={isOpen}
+      isPopup={isPopup}
       onClose={onClose}
       onSubmit={handleSubmit}
       onReset={resetForm}
