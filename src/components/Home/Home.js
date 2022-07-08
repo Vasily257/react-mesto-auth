@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { CardsContext } from '../../contexts/CardsContext';
+import { SpinnerContext } from '../../contexts/SpinnerContext';
 
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -13,8 +14,9 @@ import ConfirmActionPopup from '../СonfirmActionPopup/ConfirmActionPopup';
 
 import { api } from '../../utils/api';
 
-export default function Home({ setIsSpinnerShown }) {
+export default function Home() {
   const { cards, setCards } = useContext(CardsContext);
+  const { setIsSpinnerShown } = useContext(SpinnerContext);
 
   const [currentUser, setCurrentUser] = useState({
     name: 'Загрузка...',
