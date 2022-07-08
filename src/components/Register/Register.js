@@ -3,7 +3,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
 import useForm from '../../hooks/useForm';
 
-export default function Login({ isOpen, onLogin }) {
+export default function Register({ isOpen, onRegister }) {
   const {
     values,
     errors,
@@ -16,7 +16,7 @@ export default function Login({ isOpen, onLogin }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    onLogin({ email: values.email, password: values.password });
+    onRegister({ email: values.email, password: values.password });
   }
 
   useEffect(() => {
@@ -26,12 +26,12 @@ export default function Login({ isOpen, onLogin }) {
 
   return (
     <PopupWithForm
-      name="login"
-      title="Вход"
-      submitButtonText="Войти"
+      name="register"
+      title="Регистрация"
+      submitButtonText="Зарегистрироваться"
       isOpen={isOpen}
       isPopup={false}
-      isRegisterForm={false}
+      isRegisterForm={true}
       onSubmit={handleSubmit}
       onReset={resetForm}
       isValid={isValid}

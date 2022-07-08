@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import Header from '../Header/Header';
@@ -14,10 +15,9 @@ import AddPlacePopup from '../AddPlacePopup/AddPlacePopup';
 import ConfirmActionPopup from '../СonfirmActionPopup/ConfirmActionPopup';
 
 import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 import Spinner from '../Spinner/Spinner';
-
-import { Route, Routes } from 'react-router-dom';
 
 import { api } from '../../utils/api';
 
@@ -41,6 +41,12 @@ function App() {
   const [deletedCard, setDeletedCard] = useState(null);
 
   const [isSpinnerShown, setIsSpinnerShown] = useState(false);
+
+  const [headerText, setHeaderText] = useState({
+    entrance: '',
+    email: '',
+    exit: '',
+  });
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -155,6 +161,37 @@ function App() {
   useEffect(() => {
     setIsSpinnerShown(true);
 
+    switch (window.location.pathname) {
+      case '/sign-up':
+        setHeaderText({
+          entrance: 'Регистрация',
+          email: '',
+          exit: '',
+        });
+        break;
+      case '/sign-in':
+        setHeaderText({
+          entrance: 'Войти',
+          email: '',
+          exit: '',
+        });
+        break;
+      case '/':
+        setHeaderText({
+          entrance: '',
+          email: 'добавить почту',
+          exit: 'Выйти',
+        });
+        break;
+      default:
+        setHeaderText({
+          entrance: '',
+          email: '',
+          exit: '',
+        });
+        break;
+    }
+
     api
       .getInitialData()
       .then((initialData) => {
@@ -178,7 +215,7 @@ function App() {
 
   return (
     <div className="page index-page">
-      <Header />
+      <Header text={headerText} />
       <Routes>
         <Route
           path="/"
@@ -234,8 +271,14 @@ function App() {
           }
         />
 
-        <Route path="/sign-up" element={<Login isOpen={true} />} />
-        <Route path="/sign-in" element={<Login isOpen={true} />} />
+        <Route
+          path="/sign-up"
+          element={<Register isOpen={true} onLogin={{}} />}
+        />
+        <Route
+          path="/sign-in"
+          element={<Login isOpen={true} onRegister={{}} />}
+        />
         <Route path="*" element={<div>Страница не найдена. Код 404</div>} />
       </Routes>
       <Spinner isOpen={isSpinnerShown} />

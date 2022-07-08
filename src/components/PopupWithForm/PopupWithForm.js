@@ -4,6 +4,7 @@ export default function PopupWithForm({
   submitButtonText,
   isOpen,
   isPopup,
+  isRegisterForm,
   onClose,
   onSubmit,
   onReset,
@@ -56,7 +57,7 @@ export default function PopupWithForm({
           aria-label="Закрыть форму"
           onClick={closeAndResetPopup}
         ></button>
-        {!isPopup && (
+        {!isPopup && isRegisterForm && (
           <div className="popup__footer">
             <span className="popup__footer-text">Уже зарегистрированы?</span>
             <button className="button popup__footer-button">Войти</button>
