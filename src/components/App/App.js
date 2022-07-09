@@ -16,7 +16,6 @@ function App() {
   const [isSpinnerShown, setIsSpinnerShown] = useState(false);
 
   const [loggedIn, setLoggedIn] = useState(false);
-  setLoggedIn(false); // Удалить
 
   return (
     <div className="page index-page">
@@ -29,14 +28,8 @@ function App() {
               path="/"
               element={<ProtectedRoute loggedIn={loggedIn} component={Home} />}
             ></Route>
-            <Route
-              path="/sign-up"
-              element={<Register isOpen={true} onLogin={{}} />}
-            />
-            <Route
-              path="/sign-in"
-              element={<Login isOpen={true} onRegister={{}} />}
-            />
+            <Route path="/sign-up" element={<Register onLogin={{}} />} />
+            <Route path="/sign-in" element={<Login onRegister={{}} />} />
             <Route path="*" element={<div>Страница не найдена. Код 404</div>} />
           </Routes>
         </CardsContext.Provider>
