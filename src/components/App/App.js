@@ -28,8 +28,8 @@ function App() {
               path="/"
               element={<ProtectedRoute loggedIn={loggedIn} component={Home} />}
             ></Route>
-            <Route path="/sign-up" element={<Register onLogin={{}} />} />
-            <Route path="/sign-in" element={<Login onRegister={{}} />} />
+            <Route path="/sign-up" element={<Register />} />
+            <Route path="/sign-in" element={<Login />} />
             <Route path="*" element={<div>Страница не найдена. Код 404</div>} />
           </Routes>
         </CardsContext.Provider>

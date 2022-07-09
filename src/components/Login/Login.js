@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useForm from '../../hooks/useForm';
 
-export default function Login({ onLogin }) {
+export default function Login() {
   const {
     values,
     errors,
@@ -13,9 +13,12 @@ export default function Login({ onLogin }) {
     setIsValid,
   } = useForm({ email: '', password: '' });
 
+  const [message, setMessage] = useState();
+
   function handleSubmit(event) {
     event.preventDefault();
-    onLogin({ email: values.email, password: values.password });
+    let data = { email: values.email, password: values.password };
+    console.log(data);
   }
 
   useEffect(() => {
