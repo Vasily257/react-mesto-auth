@@ -32,9 +32,9 @@ export function authorize({ password, email }) {
   }).then(checkResponse);
 }
 
-export function getContent(token) {
+export function getContent( token ) {
   return fetch(`${BASE_URL}/users/me`, {
-    method: 'POST',
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

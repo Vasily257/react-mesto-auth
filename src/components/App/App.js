@@ -22,7 +22,9 @@ function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   function onRegister({ email, password }) {
     auth
@@ -47,6 +49,22 @@ function App() {
         }
       })
       .catch((error) => console.log(error));
+  }
+
+  function checkToken() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth
+        .getContent(token)
+        .then((response) => {
+          if (response) {
+            setUserData({ username: response._id, email: response.email });
+            setLoggedIn(true);
+            navigate('/');
+          }
+        })
+        .catch((error) => console.log(error));
+    }
   }
 
   return (
