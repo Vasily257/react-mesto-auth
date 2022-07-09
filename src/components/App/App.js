@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { CardsContext } from '../../contexts/CardsContext';
 import { SpinnerContext } from '../../contexts/SpinnerContext';
@@ -15,7 +15,8 @@ function App() {
   const [cards, setCards] = useState([]);
   const [isSpinnerShown, setIsSpinnerShown] = useState(false);
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
+  setLoggedIn(false); // Удалить
 
   return (
     <div className="page index-page">
