@@ -18,7 +18,6 @@ export default function Login() {
   function handleSubmit(event) {
     event.preventDefault();
     let data = { email: values.email, password: values.password };
-    console.log(data);
   }
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export default function Login() {
   return (
     <div className={'popup popup_type_login popup_opened popup_not-popup'}>
       <div className={'popup__container popup__container_not-popup'}>
-        <h2 className={'popup__title popup__title_not-popup'}>Регистрация</h2>
+        <h2 className={'popup__title popup__title_not-popup'}>Вход</h2>
         <form
           className={`popup__form`}
           name="login"
@@ -91,13 +90,9 @@ export default function Login() {
             type="submit"
             disabled={!isValid}
           >
-            Зарегистрироваться
+            Войти
           </button>
         </form>
-        <div className="popup__footer">
-          <span className="popup__footer-text">Уже зарегистрированы?</span>
-          <button className="button popup__footer-button">Войти</button>
-        </div>
       </div>
     </div>
   );

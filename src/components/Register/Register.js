@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import useForm from '../../hooks/useForm';
 
-export default function Register() {
+export default function Register({ onRegister }) {
   const {
     values,
     errors,
@@ -17,8 +17,7 @@ export default function Register() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let data = { email: values.email, password: values.password };
-    console.log(data);
+    onRegister({ email: values.email, password: values.password });
   }
 
   useEffect(() => {
