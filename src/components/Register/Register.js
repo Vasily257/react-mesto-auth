@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import useForm from '../../hooks/useForm';
 
@@ -13,11 +13,10 @@ export default function Register({ onRegister }) {
     setIsValid,
   } = useForm({ email: '', password: '' });
 
-  const [message, setMessage] = useState();
-
   function handleSubmit(event) {
     event.preventDefault();
     onRegister({ email: values.email, password: values.password });
+    resetForm();
   }
 
   useEffect(() => {

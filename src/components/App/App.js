@@ -30,8 +30,20 @@ function App() {
       .then((data) => {
         if (data) {
           setUserData({ username: data._id, email: email });
-          setLoggedIn(true);
           navigate('/sign-in');
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function onLogin({ email, password }) {
+    auth
+      .authorize({ email, password })
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          setLoggedIn(true);
+          navigate('/');
         }
       })
       .catch((error) => console.log(error));
@@ -52,7 +64,7 @@ function App() {
               path="/sign-up"
               element={<Register onRegister={onRegister} />}
             />
-            <Route path="/sign-in" element={<Login />} />
+            <Route path="/sign-in" element={<Login onLogin={onLogin} />} />
             <Route path="*" element={<div>Страница не найдена. Код 404</div>} />
           </Routes>
         </CardsContext.Provider>
