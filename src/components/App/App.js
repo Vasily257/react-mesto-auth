@@ -18,7 +18,7 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [userData, setUserData] = useState({ username: '', email: '' });
+  const [email, setEmail] = useState('');
 
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function App() {
       .register({ email, password })
       .then((data) => {
         if (data) {
-          setUserData({ username: data._id, email: email });
+          setEmail(data.email);
           navigate('/sign-in');
         }
       })
@@ -58,7 +58,7 @@ function App() {
         .getContent(token)
         .then((response) => {
           if (response) {
-            setUserData({ username: response._id, email: response.email });
+            setEmail(response.email);
             setLoggedIn(true);
             navigate('/');
           }
@@ -70,7 +70,7 @@ function App() {
   return (
     <div className="page index-page">
       <SpinnerContext.Provider value={{ isSpinnerShown, setIsSpinnerShown }}>
-        <Header />
+        <Header userEmail={email} />
 
         <CardsContext.Provider value={{ cards, setCards }}>
           <Routes>
