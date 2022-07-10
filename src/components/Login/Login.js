@@ -3,20 +3,12 @@ import { useEffect } from 'react';
 import useForm from '../../hooks/useForm';
 
 export default function Login({ onLogin }) {
-  const {
-    values,
-    errors,
-    isValid,
-    handleChange,
-    resetForm,
-    setValues,
-    setIsValid,
-  } = useForm({ email: '', password: '' });
+  const { values, errors, isValid, handleChange, setValues, setIsValid } =
+    useForm({ email: '', password: '' });
 
   function handleSubmit(event) {
     event.preventDefault();
     onLogin({ email: values.email, password: values.password });
-    resetForm();
   }
 
   useEffect(() => {
