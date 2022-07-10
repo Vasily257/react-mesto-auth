@@ -78,6 +78,8 @@ function App() {
     }
   }
 
+  // localStorage.removeItem('token');
+
   return (
     <div className="page index-page">
       <SpinnerContext.Provider value={{ isSpinnerShown, setIsSpinnerShown }}>

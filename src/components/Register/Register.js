@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import useForm from '../../hooks/useForm';
 
@@ -86,7 +87,9 @@ export default function Register({ onRegister }) {
         </form>
         <div className="popup__footer">
           <span className="popup__footer-text">Уже зарегистрированы?</span>
-          <button className="button popup__footer-button">Войти</button>
+          <Link className="button popup__footer-button" to="/sign-in">
+            Войти
+          </Link>
         </div>
       </div>
     </div>
