@@ -71,7 +71,7 @@ function App() {
           if (response) {
             setEmail(response.email);
             setLoggedIn(true);
-            navigate('/');
+            navigate('/', { replace: true });
           }
         })
         .catch((error) => console.log(error));
