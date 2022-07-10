@@ -1,11 +1,12 @@
-.header__link {
+.header__email {
   margin-top: 12px;
+  margin-left: auto;
   text-decoration: none;
   font-size: 14px;
 }
 
 @media screen and (min-width: 600px) {
-  .header__link {
+  .header__email {
     margin-top: 8px;
     font-size: 18px;
   }

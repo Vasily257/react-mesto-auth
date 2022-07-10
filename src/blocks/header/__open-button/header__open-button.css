@@ -1,0 +1,9 @@
+.header__open-button {
+  display: block;
+}
+
+@media screen and (min-width: 600px) {
+  .header__open-button {
+    display: none;
+  }
+}

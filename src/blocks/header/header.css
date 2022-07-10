@@ -25,7 +25,6 @@ header::before {
 
 @media screen and (min-width: 600px) {
   .header {
- 
     min-height: 74px;
 
     border-bottom: 1px solid #545454;

@@ -1,0 +1,9 @@
+.header__close-button {
+  display: block;
+}
+
+@media screen and (min-width: 600px) {
+  .header__close-button {
+    display: none;
+  }
+}

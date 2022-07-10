@@ -19,7 +19,6 @@ function App() {
 
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [email, setEmail] = useState('');
@@ -38,7 +37,7 @@ function App() {
         if (data) {
           setIsRegistered(true);
           setInfoTooltipOpen(true);
-          setEmail(data.email);
+          setEmail(data.data.email);
           navigate('/sign-in');
         }
       })
@@ -69,7 +68,7 @@ function App() {
         .getContent(token)
         .then((response) => {
           if (response) {
-            setEmail(response.email);
+            setEmail(response.data.email);
             setLoggedIn(true);
             navigate('/', { replace: true });
           }
