@@ -1,0 +1,12 @@
+.header__link {
+  display: inline;
+  margin-top: 8px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 600px) {
+  .header__link {
+    font-size: 18px;
+  }
+}
