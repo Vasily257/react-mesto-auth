@@ -3,7 +3,6 @@ export default function PopupWithForm({
   title,
   submitButtonText,
   isOpen,
-
   onClose,
   onSubmit,
   onReset,

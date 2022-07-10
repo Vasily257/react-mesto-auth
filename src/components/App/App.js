@@ -8,6 +8,7 @@ import ProtectedRoute from '../HOC/ProtectedRoute';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Spinner from '../Spinner/Spinner';
 
 import * as auth from '../../utils/auth';
@@ -15,6 +16,9 @@ import * as auth from '../../utils/auth';
 function App() {
   const [cards, setCards] = useState([]);
   const [isSpinnerShown, setIsSpinnerShown] = useState(false);
+
+  const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -24,6 +28,7 @@ function App() {
 
   useEffect(() => {
     checkToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function onRegister({ email, password }) {
@@ -31,11 +36,17 @@ function App() {
       .register({ email, password })
       .then((data) => {
         if (data) {
+          setIsRegistered(true);
+          setInfoTooltipOpen(true);
           setEmail(data.email);
           navigate('/sign-in');
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setIsRegistered(false);
+        setInfoTooltipOpen(true);
+        console.log(error);
+      });
   }
 
   function onLogin({ email, password }) {
@@ -88,6 +99,11 @@ function App() {
         </CardsContext.Provider>
 
         <Spinner isOpen={isSpinnerShown} />
+        <InfoTooltip
+          isOpen={infoTooltipOpen}
+          setInfoTooltipOpen={setInfoTooltipOpen}
+          isRegistered={isRegistered}
+        />
       </SpinnerContext.Provider>
     </div>
   );
