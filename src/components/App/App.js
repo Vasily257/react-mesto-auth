@@ -11,6 +11,8 @@ import Register from '../Register/Register';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Spinner from '../Spinner/Spinner';
 
+import { registrationText } from '../../utils/constants';
+
 import * as auth from '../../utils/auth';
 
 function App() {
@@ -135,8 +137,9 @@ function App() {
         <Spinner isOpen={isSpinnerShown} />
         <InfoTooltip
           isOpen={infoTooltipOpen}
-          setInfoTooltipOpen={setInfoTooltipOpen}
           isRegistered={isRegistered}
+          infoText={registrationText}
+          setInfoTooltipOpen={setInfoTooltipOpen}
         />
       </SpinnerContext.Provider>
     </div>
