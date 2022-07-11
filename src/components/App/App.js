@@ -14,6 +14,7 @@ import Spinner from '../Spinner/Spinner';
 import { registrationText } from '../../utils/constants';
 
 import * as auth from '../../utils/auth';
+import Notfoundpage from '../Notfoundpage/Notfoundpage';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -138,7 +139,7 @@ function App() {
               element={<Register onRegister={onRegister} />}
             />
             <Route path="/sign-in" element={<Login onLogin={onLogin} />} />
-            <Route path="*" element={<div>Страница не найдена. Код 404</div>} />
+            <Route path="*" element={<Notfoundpage />} />
           </Routes>
         </CardsContext.Provider>
 
