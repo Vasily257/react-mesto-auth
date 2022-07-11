@@ -29,8 +29,11 @@ function App() {
 
   useEffect(() => {
     checkToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    loggedIn && navigate('/');
+  }, [loggedIn]);
 
   function onRegister({ email, password }) {
     setIsSpinnerShown(true);
@@ -55,7 +58,7 @@ function App() {
       });
   }
 
-  function onLogin({ email, password }) { 
+  function onLogin({ email, password }) {
     setIsSpinnerShown(true);
 
     auth
@@ -65,7 +68,6 @@ function App() {
           localStorage.setItem('token', data.token);
           setEmail(email);
           setLoggedIn(true);
-          navigate('/');
         }
       })
       .catch((error) => console.log(error))
@@ -85,7 +87,6 @@ function App() {
           if (response) {
             setEmail(response.data.email);
             setLoggedIn(true);
-            navigate('/', { replace: true });
           }
         })
         .catch((error) => console.log(error))
@@ -116,8 +117,12 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<ProtectedRoute loggedIn={loggedIn} component={Home} />}
-            ></Route>
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/sign-up"
               element={<Register onRegister={onRegister} />}
