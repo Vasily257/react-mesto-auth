@@ -23,6 +23,8 @@ function App() {
 
   const [email, setEmail] = useState('');
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -82,7 +84,11 @@ function App() {
   return (
     <div className="page index-page">
       <SpinnerContext.Provider value={{ isSpinnerShown, setIsSpinnerShown }}>
-        <Header userEmail={email} />
+        <Header
+          userEmail={email}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
 
         <CardsContext.Provider value={{ cards, setCards }}>
           <Routes>
