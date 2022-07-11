@@ -33,6 +33,8 @@ function App() {
   }, []);
 
   function onRegister({ email, password }) {
+    setIsSpinnerShown(true);
+
     auth
       .register({ email, password })
       .then((data) => {
@@ -47,10 +49,15 @@ function App() {
         setIsRegistered(false);
         setInfoTooltipOpen(true);
         console.log(error);
+      })
+      .finally(() => {
+        setIsSpinnerShown(false);
       });
   }
 
   function onLogin({ email, password }) {
+    setIsSpinnerShown(true);
+
     auth
       .authorize({ email, password })
       .then((data) => {
@@ -60,10 +67,15 @@ function App() {
           navigate('/');
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => {
+        setIsSpinnerShown(false);
+      });
   }
 
   function checkToken() {
+    setIsSpinnerShown(true);
+
     const token = localStorage.getItem('token');
     if (token) {
       auth
@@ -75,7 +87,10 @@ function App() {
             navigate('/', { replace: true });
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
+        .finally(() => {
+          setIsSpinnerShown(false);
+        });
     }
   }
 
