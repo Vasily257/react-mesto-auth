@@ -96,7 +96,7 @@ function App() {
     }
   }
 
-  function onLogout() {
+  function onSignOut() {
     localStorage.removeItem('token');
     setIsMenuOpen(false);
     setEmail('');
@@ -108,7 +108,7 @@ function App() {
       <SpinnerContext.Provider value={{ isSpinnerShown, setIsSpinnerShown }}>
         <Header
           userEmail={email}
-          onLogout={onLogout}
+          onSignOut={onSignOut}
           isMenuOpen={isMenuOpen}
           setIsMenuOpen={setIsMenuOpen}
         />

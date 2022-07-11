@@ -3,7 +3,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 
 export default function Header({
   userEmail,
-  onLogout,
+  onSignOut,
   isMenuOpen,
   setIsMenuOpen,
 }) {
@@ -35,7 +35,7 @@ export default function Header({
                 className={`button header__link header__link_out ${
                   isMenuOpen && 'header__email_menu-opened'
                 }`}
-                onClick={onLogout}
+                onClick={onSignOut}
               >
                 Выйти
               </Link>
