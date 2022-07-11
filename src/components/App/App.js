@@ -55,7 +55,7 @@ function App() {
       });
   }
 
-  function onLogin({ email, password }) {
+  function onLogin({ email, password }) { 
     setIsSpinnerShown(true);
 
     auth
@@ -63,6 +63,7 @@ function App() {
       .then((data) => {
         if (data.token) {
           localStorage.setItem('token', data.token);
+          setEmail(email);
           setLoggedIn(true);
           navigate('/');
         }
