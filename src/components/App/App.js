@@ -79,13 +79,19 @@ function App() {
     }
   }
 
-  // localStorage.removeItem('token');
+  function onLogout() {
+    localStorage.removeItem('token');
+    setIsMenuOpen(false);
+    setEmail('');
+    setLoggedIn(false);
+  }
 
   return (
     <div className="page index-page">
       <SpinnerContext.Provider value={{ isSpinnerShown, setIsSpinnerShown }}>
         <Header
           userEmail={email}
+          onLogout={onLogout}
           isMenuOpen={isMenuOpen}
           setIsMenuOpen={setIsMenuOpen}
         />
