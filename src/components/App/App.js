@@ -17,12 +17,12 @@ import * as auth from '../../utils/auth';
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [isSpinnerShown, setIsSpinnerShown] = useState(false);
 
+  const [isSpinnerShown, setIsSpinnerShown] = useState(false);
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
+
   const [isRegistered, setIsRegistered] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-
   const [email, setEmail] = useState('');
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -70,9 +70,14 @@ function App() {
           localStorage.setItem('token', data.token);
           setEmail(email);
           setLoggedIn(true);
+        } else {
+          setIsSpinnerShown(false);
         }
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        setInfoTooltipOpen(true);
+        console.log(error);
+      })
       .finally(() => {
         setIsSpinnerShown(false);
       });
@@ -82,6 +87,7 @@ function App() {
     setIsSpinnerShown(true);
 
     const token = localStorage.getItem('token');
+
     if (token) {
       auth
         .getContent(token)
@@ -95,6 +101,8 @@ function App() {
         .finally(() => {
           setIsSpinnerShown(false);
         });
+    } else {
+      setIsSpinnerShown(false);
     }
   }
 
