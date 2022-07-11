@@ -11,16 +11,19 @@ import Register from '../Register/Register';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Spinner from '../Spinner/Spinner';
 
+import { registrationText } from '../../utils/constants';
+
 import * as auth from '../../utils/auth';
+import Notfoundpage from '../Notfoundpage/Notfoundpage';
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [isSpinnerShown, setIsSpinnerShown] = useState(false);
 
+  const [isSpinnerShown, setIsSpinnerShown] = useState(false);
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
+
   const [isRegistered, setIsRegistered] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-
   const [email, setEmail] = useState('');
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,9 +71,14 @@ function App() {
           localStorage.setItem('token', data.token);
           setEmail(email);
           setLoggedIn(true);
+        } else {
+          setIsSpinnerShown(false);
         }
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        setInfoTooltipOpen(true);
+        console.log(error);
+      })
       .finally(() => {
         setIsSpinnerShown(false);
       });
@@ -80,6 +88,7 @@ function App() {
     setIsSpinnerShown(true);
 
     const token = localStorage.getItem('token');
+
     if (token) {
       auth
         .getContent(token)
@@ -93,6 +102,8 @@ function App() {
         .finally(() => {
           setIsSpinnerShown(false);
         });
+    } else {
+      setIsSpinnerShown(false);
     }
   }
 
@@ -128,15 +139,16 @@ function App() {
               element={<Register onRegister={onRegister} />}
             />
             <Route path="/sign-in" element={<Login onLogin={onLogin} />} />
-            <Route path="*" element={<div>Страница не найдена. Код 404</div>} />
+            <Route path="*" element={<Notfoundpage />} />
           </Routes>
         </CardsContext.Provider>
 
         <Spinner isOpen={isSpinnerShown} />
         <InfoTooltip
           isOpen={infoTooltipOpen}
-          setInfoTooltipOpen={setInfoTooltipOpen}
           isRegistered={isRegistered}
+          infoText={registrationText}
+          setInfoTooltipOpen={setInfoTooltipOpen}
         />
       </SpinnerContext.Provider>
     </div>

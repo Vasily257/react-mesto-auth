@@ -4,6 +4,7 @@ import failure from '../../images/infoTooltip/failure.svg';
 export default function InfoTooltip({
   isOpen,
   isRegistered,
+  infoText,
   setInfoTooltipOpen,
 }) {
   return (
@@ -20,9 +21,7 @@ export default function InfoTooltip({
           alt="Статус регистрации"
         />
         <h2 className="popup__title popup__title_info-tooltip">{`${
-          isRegistered
-            ? 'Вы успешно зарегистрировались!'
-            : `Что-то пошло не так! \n Попробуйте ещё раз.`
+          isRegistered ? infoText.success : infoText.failure
         }`}</h2>
         <button
           className="button popup__close-button"
